@@ -40,7 +40,7 @@ namespace Serial_Port
         private void InitializeComponent()
         {
             components = new Container();
-            ASCIIEncoding asciiEncodingSealed1 = new ASCIIEncoding();
+            ASCIIEncoding asciiEncoding1 = new ASCIIEncoding();
             DecoderReplacementFallback decoderReplacementFallback1 = new DecoderReplacementFallback();
             EncoderReplacementFallback encoderReplacementFallback1 = new EncoderReplacementFallback();
             groupBox1 = new GroupBox();
@@ -55,14 +55,24 @@ namespace Serial_Port
             label2 = new Label();
             label1 = new Label();
             groupBox2 = new GroupBox();
+            groupBox4 = new GroupBox();
+            lblStatusCom = new Label();
             progressBar1 = new ProgressBar();
             btnClose = new Button();
             btnOpen = new Button();
             btnSendData = new Button();
             tBoxDataOut = new TextBox();
             serialPort1 = new SerialPort(components);
+            groupBox3 = new GroupBox();
+            btnClearDataOut = new Button();
+            groupBox6 = new GroupBox();
+            btClearDataIN = new Button();
+            tBoxDataIN = new TextBox();
             groupBox1.SuspendLayout();
             groupBox2.SuspendLayout();
+            groupBox4.SuspendLayout();
+            groupBox3.SuspendLayout();
+            groupBox6.SuspendLayout();
             SuspendLayout();
             // 
             // groupBox1
@@ -81,7 +91,7 @@ namespace Serial_Port
             groupBox1.Margin = new Padding(4, 5, 4, 5);
             groupBox1.Name = "groupBox1";
             groupBox1.Padding = new Padding(4, 5, 4, 5);
-            groupBox1.Size = new Size(404, 261);
+            groupBox1.Size = new Size(357, 261);
             groupBox1.TabIndex = 0;
             groupBox1.TabStop = false;
             groupBox1.Text = "Com Port Control";
@@ -90,7 +100,7 @@ namespace Serial_Port
             // 
             cBoxPARITYBITS.FormattingEnabled = true;
             cBoxPARITYBITS.Items.AddRange(new object[] { "None ", "Odd", "Even" });
-            cBoxPARITYBITS.Location = new Point(163, 193);
+            cBoxPARITYBITS.Location = new Point(130, 192);
             cBoxPARITYBITS.Margin = new Padding(4, 5, 4, 5);
             cBoxPARITYBITS.Name = "cBoxPARITYBITS";
             cBoxPARITYBITS.Size = new Size(200, 28);
@@ -101,7 +111,7 @@ namespace Serial_Port
             // 
             cBoxSTOPBITS.FormattingEnabled = true;
             cBoxSTOPBITS.Items.AddRange(new object[] { "One ", "Two" });
-            cBoxSTOPBITS.Location = new Point(163, 155);
+            cBoxSTOPBITS.Location = new Point(130, 154);
             cBoxSTOPBITS.Margin = new Padding(4, 5, 4, 5);
             cBoxSTOPBITS.Name = "cBoxSTOPBITS";
             cBoxSTOPBITS.Size = new Size(200, 28);
@@ -112,7 +122,7 @@ namespace Serial_Port
             // 
             cBoxDATABITS.FormattingEnabled = true;
             cBoxDATABITS.Items.AddRange(new object[] { "6", "7", "8" });
-            cBoxDATABITS.Location = new Point(163, 117);
+            cBoxDATABITS.Location = new Point(130, 116);
             cBoxDATABITS.Margin = new Padding(4, 5, 4, 5);
             cBoxDATABITS.Name = "cBoxDATABITS";
             cBoxDATABITS.Size = new Size(200, 28);
@@ -123,7 +133,7 @@ namespace Serial_Port
             // 
             cBoxBAUDRATE.FormattingEnabled = true;
             cBoxBAUDRATE.Items.AddRange(new object[] { "2400", "4800", "9600" });
-            cBoxBAUDRATE.Location = new Point(164, 75);
+            cBoxBAUDRATE.Location = new Point(131, 74);
             cBoxBAUDRATE.Margin = new Padding(4, 5, 4, 5);
             cBoxBAUDRATE.Name = "cBoxBAUDRATE";
             cBoxBAUDRATE.Size = new Size(200, 28);
@@ -133,7 +143,7 @@ namespace Serial_Port
             // cBoxCOMPORT
             // 
             cBoxCOMPORT.FormattingEnabled = true;
-            cBoxCOMPORT.Location = new Point(163, 34);
+            cBoxCOMPORT.Location = new Point(130, 33);
             cBoxCOMPORT.Margin = new Padding(4, 5, 4, 5);
             cBoxCOMPORT.Name = "cBoxCOMPORT";
             cBoxCOMPORT.Size = new Size(200, 28);
@@ -191,6 +201,7 @@ namespace Serial_Port
             // 
             // groupBox2
             // 
+            groupBox2.Controls.Add(groupBox4);
             groupBox2.Controls.Add(progressBar1);
             groupBox2.Controls.Add(btnClose);
             groupBox2.Controls.Add(btnOpen);
@@ -198,25 +209,45 @@ namespace Serial_Port
             groupBox2.Margin = new Padding(4, 5, 4, 5);
             groupBox2.Name = "groupBox2";
             groupBox2.Padding = new Padding(4, 5, 4, 5);
-            groupBox2.Size = new Size(288, 165);
+            groupBox2.Size = new Size(357, 165);
             groupBox2.TabIndex = 1;
             groupBox2.TabStop = false;
             // 
+            // groupBox4
+            // 
+            groupBox4.Controls.Add(lblStatusCom);
+            groupBox4.Location = new Point(162, 14);
+            groupBox4.Name = "groupBox4";
+            groupBox4.Size = new Size(174, 100);
+            groupBox4.TabIndex = 3;
+            groupBox4.TabStop = false;
+            groupBox4.Text = "COM PORT STATUS";
+            // 
+            // lblStatusCom
+            // 
+            lblStatusCom.AutoSize = true;
+            lblStatusCom.Font = new Font("Segoe UI", 18F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
+            lblStatusCom.Location = new Point(41, 33);
+            lblStatusCom.Name = "lblStatusCom";
+            lblStatusCom.Size = new Size(73, 41);
+            lblStatusCom.TabIndex = 0;
+            lblStatusCom.Text = "OFF";
+            // 
             // progressBar1
             // 
-            progressBar1.Location = new Point(17, 97);
+            progressBar1.Location = new Point(8, 124);
             progressBar1.Margin = new Padding(4, 5, 4, 5);
             progressBar1.Name = "progressBar1";
-            progressBar1.Size = new Size(263, 45);
+            progressBar1.Size = new Size(323, 31);
             progressBar1.TabIndex = 2;
             progressBar1.Click += progressBar1_Click;
             // 
             // btnClose
             // 
-            btnClose.Location = new Point(155, 30);
+            btnClose.Location = new Point(8, 69);
             btnClose.Margin = new Padding(4, 5, 4, 5);
             btnClose.Name = "btnClose";
-            btnClose.Size = new Size(125, 45);
+            btnClose.Size = new Size(145, 45);
             btnClose.TabIndex = 1;
             btnClose.Text = "Close";
             btnClose.UseVisualStyleBackColor = true;
@@ -224,10 +255,10 @@ namespace Serial_Port
             // 
             // btnOpen
             // 
-            btnOpen.Location = new Point(8, 30);
+            btnOpen.Location = new Point(8, 14);
             btnOpen.Margin = new Padding(4, 5, 4, 5);
             btnOpen.Name = "btnOpen";
-            btnOpen.Size = new Size(125, 45);
+            btnOpen.Size = new Size(145, 45);
             btnOpen.TabIndex = 0;
             btnOpen.Text = "Open";
             btnOpen.UseVisualStyleBackColor = true;
@@ -236,10 +267,10 @@ namespace Serial_Port
             // btnSendData
             // 
             btnSendData.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            btnSendData.Location = new Point(324, 289);
+            btnSendData.Location = new Point(69, 291);
             btnSendData.Margin = new Padding(4, 5, 4, 5);
             btnSendData.Name = "btnSendData";
-            btnSendData.Size = new Size(96, 165);
+            btnSendData.Size = new Size(188, 37);
             btnSendData.TabIndex = 2;
             btnSendData.Text = "Send Data";
             btnSendData.UseVisualStyleBackColor = true;
@@ -247,11 +278,11 @@ namespace Serial_Port
             // 
             // tBoxDataOut
             // 
-            tBoxDataOut.Location = new Point(443, 26);
+            tBoxDataOut.Location = new Point(24, 28);
             tBoxDataOut.Margin = new Padding(4, 5, 4, 5);
             tBoxDataOut.Multiline = true;
             tBoxDataOut.Name = "tBoxDataOut";
-            tBoxDataOut.Size = new Size(561, 428);
+            tBoxDataOut.Size = new Size(288, 253);
             tBoxDataOut.TabIndex = 3;
             // 
             // serialPort1
@@ -260,9 +291,9 @@ namespace Serial_Port
             serialPort1.DataBits = 8;
             serialPort1.DiscardNull = false;
             serialPort1.DtrEnable = false;
-/*            asciiEncodingSealed1.DecoderFallback = decoderReplacementFallback1;
-            asciiEncodingSealed1.EncoderFallback = encoderReplacementFallback1;
-            serialPort1.Encoding = asciiEncodingSealed1;*/
+/*            asciiEncoding1.DecoderFallback = decoderReplacementFallback1;
+            asciiEncoding1.EncoderFallback = encoderReplacementFallback1;
+            serialPort1.Encoding = asciiEncoding1;*/
             serialPort1.Handshake = Handshake.None;
             serialPort1.NewLine = "\n";
             serialPort1.Parity = Parity.None;
@@ -275,14 +306,69 @@ namespace Serial_Port
             serialPort1.StopBits = StopBits.One;
             serialPort1.WriteBufferSize = 2048;
             serialPort1.WriteTimeout = -1;
+            serialPort1.DataReceived += serialPort1_DataReceived;
+            // 
+            // groupBox3
+            // 
+            groupBox3.Controls.Add(btnClearDataOut);
+            groupBox3.Controls.Add(btnSendData);
+            groupBox3.Controls.Add(tBoxDataOut);
+            groupBox3.Location = new Point(380, 18);
+            groupBox3.Name = "groupBox3";
+            groupBox3.Size = new Size(343, 436);
+            groupBox3.TabIndex = 4;
+            groupBox3.TabStop = false;
+            groupBox3.Text = "Transmitter Control";
+            groupBox3.Enter += groupBox3_Enter;
+            // 
+            // btnClearDataOut
+            // 
+            btnClearDataOut.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            btnClearDataOut.Location = new Point(69, 363);
+            btnClearDataOut.Margin = new Padding(4, 5, 4, 5);
+            btnClearDataOut.Name = "btnClearDataOut";
+            btnClearDataOut.Size = new Size(188, 37);
+            btnClearDataOut.TabIndex = 3;
+            btnClearDataOut.Text = "Clear Data OUT";
+            btnClearDataOut.UseVisualStyleBackColor = true;
+            btnClearDataOut.Click += btnClearDataOut_Click;
+            // 
+            // groupBox6
+            // 
+            groupBox6.Controls.Add(btClearDataIN);
+            groupBox6.Controls.Add(tBoxDataIN);
+            groupBox6.Location = new Point(729, 18);
+            groupBox6.Name = "groupBox6";
+            groupBox6.Size = new Size(353, 436);
+            groupBox6.TabIndex = 5;
+            groupBox6.TabStop = false;
+            groupBox6.Text = "Receiver Control";
+            // 
+            // btClearDataIN
+            // 
+            btClearDataIN.Location = new Point(71, 308);
+            btClearDataIN.Name = "btClearDataIN";
+            btClearDataIN.Size = new Size(199, 77);
+            btClearDataIN.TabIndex = 1;
+            btClearDataIN.Text = "Clear Data IN";
+            btClearDataIN.UseVisualStyleBackColor = true;
+            btClearDataIN.Click += btClearDataIN_Click;
+            // 
+            // tBoxDataIN
+            // 
+            tBoxDataIN.Location = new Point(23, 28);
+            tBoxDataIN.Multiline = true;
+            tBoxDataIN.Name = "tBoxDataIN";
+            tBoxDataIN.Size = new Size(312, 253);
+            tBoxDataIN.TabIndex = 0;
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1009, 674);
-            Controls.Add(tBoxDataOut);
-            Controls.Add(btnSendData);
+            ClientSize = new Size(1116, 501);
+            Controls.Add(groupBox6);
+            Controls.Add(groupBox3);
             Controls.Add(groupBox2);
             Controls.Add(groupBox1);
             Margin = new Padding(4, 5, 4, 5);
@@ -292,8 +378,13 @@ namespace Serial_Port
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
             groupBox2.ResumeLayout(false);
+            groupBox4.ResumeLayout(false);
+            groupBox4.PerformLayout();
+            groupBox3.ResumeLayout(false);
+            groupBox3.PerformLayout();
+            groupBox6.ResumeLayout(false);
+            groupBox6.PerformLayout();
             ResumeLayout(false);
-            PerformLayout();
         }
 
 
@@ -318,5 +409,17 @@ namespace Serial_Port
         private Button btnSendData;
         private TextBox tBoxDataOut;
         private System.IO.Ports.SerialPort serialPort1;
+        private GroupBox groupBox3;
+        private Button btnClearDataOut;
+        private GroupBox groupBox4;
+        private Label lblStatusCom;
+        private GroupBox groupBox5;
+        private Button button1;
+        private Button button;
+        private TextBox textBox1;
+        private Button btnClearDataIN;
+        private GroupBox groupBox6;
+        private Button btClearDataIN;
+        private TextBox tBoxDataIN;
     }
 }
