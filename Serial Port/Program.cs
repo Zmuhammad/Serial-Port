@@ -4,7 +4,6 @@ namespace Serial_Port
     {
         /// <summary>
         ///  The main entry point for the application.
-        /// </summary>
         [STAThread]
         static void Main()
         {
