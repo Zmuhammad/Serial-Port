@@ -43,7 +43,7 @@ namespace Serial_Port
                 serialPort1.Open();
                 progressBar1.Value = 100;
 
-                lblStatusCom.Text = "ON";
+                lblStatusCom.Text = " ON ";
 
             }
             catch (Exception err)
