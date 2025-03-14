@@ -1,4 +1,4 @@
-read me file 1
+README
 serial monitoring test
 for utilitty meters mainly electrical
 
